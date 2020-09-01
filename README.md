@@ -29,8 +29,8 @@ The package called 'dataset_plots' has several utilities to plot the extracted/l
 
 As already mentioned, we can implement an exploratory analysis on the dataset; with this, we can automate the selection of attributes by means of found correlations and other aspects. An example of a Pandas profile report can be found at '\dataset_EDA\eda_reports' folder. With this useful and interactive report in HTML format, we can check descriptive statistics values, correlation matrixes and even automate the selected features based on a given correlation threshold: 
 
-![Alt text](\readme_files/EDA_2_opt.png "EDA example 1")
-![Alt text](\readme_files/EDA_opt.png "EDA example 2")
+![Alt text](/readme_files/EDA_2_opt.png "EDA example 1")
+![Alt text](/readme_files/EDA_opt.png "EDA example 2")
 
 ## Dataset preprocessing
 
@@ -47,7 +47,7 @@ The selected models must be part of the scikit-learn library, although the same 
 Finally, the best model is finally selected based on a given desired metric among the best models returned by the Modelling step. 
 An example of the cross validation metrics result, for each model, is as follows, showing a mean_test_recall of 0.98 for the best classifier:
 
-![Alt text](\readme_files/cross_validation_results_opt.jpg "Validation results")
+![Alt text](/readme_files/cross_validation_results_opt.jpg "Validation results")
 
 For this example, since there is a high unbalance between rain/no rain data, and considering that a weather predictor should be accurate predicting rain, we have chosen 'recall' as the main validation metric focusing on detecting true positives. More info on recall meaning: https://en.wikipedia.org/wiki/Precision_and_recall
 
@@ -55,4 +55,4 @@ For this example, since there is a high unbalance between rain/no rain data, and
 
 As with any software project, testing is compulsory for delivering a reliable product; with frameworks like unittest, py.test... we can implement as many code and logic tests as we wish:
 
-![Alt text](\readme_files/tests_opt.jpg "Tests")
+![Alt text](/readme_files/tests_opt.jpg "Tests")
