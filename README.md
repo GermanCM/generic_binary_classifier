@@ -1,5 +1,3 @@
-[click aquí para versión en español](https://onesait-git.cwbyminsait.com/data/generic-classifier-pipeline/blob/dev/readme-es.md)
-
 # Generic classifier pipeline
 
 ### This project contains: <p>
