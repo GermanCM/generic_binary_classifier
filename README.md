@@ -1,5 +1,5 @@
 # Generic classifier pipeline
-
+---
 ### This project contains: <p>
 
 * functions to load and transform data from a database or a csv file

@@ -1,0 +1,10 @@
+.DS_Store
+.DS_Store
+project/.DS_Store
+project/dataset_EDA/__pycache__/__init__.cpython-37.pyc
+project/dataset_elt/__pycache__/__init__.cpython-37.pyc
+project/dataset_plots/__pycache__/__init__.cpython-37.pyc
+project/dataset_preprocessing/__pycache__/__init__.cpython-37.pyc
+project/modelling/__pycache__/__init__.cpython-37.pyc
+project/tests/__pycache__/generic_test.cpython-37-pytest-6.0.1.pyc
+project/validation/__pycache__/__init__.cpython-37.pyc
