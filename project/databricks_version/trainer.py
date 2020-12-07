@@ -1,4 +1,12 @@
 # Databricks notebook source
+import numpy as np
+import pandas as pd 
+from sklearn.neural_network import MLPClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.dummy import DummyClassifier
+from tqdm import tqdm
 
 class Preprocessing():
     """
@@ -7,6 +15,14 @@ class Preprocessing():
     """
     def __init__(self, dataframe=None):
         self.dataframe = dataframe
+        
+    def read_csv(self, dataset_location, cols_to_use, sep_val=','):
+        try:
+            self.dataframe = pd.read_csv(dataset_location, usecols=cols_to_use, sep=sep_val)
+            return self.dataframe
+          
+        except Exception as exc:
+            return exc
 
     def impute_attribute(self, attribute, desired_strategy):
         try:
@@ -56,6 +72,89 @@ class Preprocessing():
         except Exception as exc:
             return exc
 
+    def get_rejected_attributes(self, correlation_threshold=0.9):
+        try:
+            import pandas_profiling
+
+            array_df_profile = pandas_profiling.ProfileReport(self.dataframe)
+            array_df_rejected = array_df_profile.get_rejected_variables(correlation_threshold)
+            
+            return array_df_rejected
+
+        except Exception as exc:
+            return exc
+          
+    def check_values_range(self, attribute, expected_range_min, expected_range_max):
+        try:
+            below_range_mask = self.dataframe[attribute].values < expected_range_min
+            above_range_mask = self.dataframe[attribute].values > expected_range_max
+            below_range_samples = self.dataframe[below_range_mask]
+            above_range_samples = self.dataframe[above_range_mask]
+
+            return below_range_samples, above_range_samples
+        except Exception as exc:
+            return exc
+
+    def get_outliers_tukey_test(self, attribute):
+        """[summary]
+        
+        Arguments:
+            attribute {string} -- dataframe column on which we can checks possible outliers
+        
+        Returns:
+            list, dataframe -- outlier indices list, subdataframe containing the samples with found outlier
+        """
+        try:
+            import numpy as np 
+            mask_not_nan_values = np.isnan(self.dataframe[attribute].values)==False
+            not_nan_values = self.dataframe[attribute][mask_not_nan_values]
+
+            q1 = np.percentile(not_nan_values, 25)
+            q3 = np.percentile(not_nan_values, 75)
+            iqr = q3 - q1 
+            
+            floor = q1 - 1.5*iqr
+            ceiling = q3 + 1.5*iqr
+            
+            outlier_indices = list(self.dataframe[attribute].index[(self.dataframe[attribute].values < floor)|(self.dataframe[attribute].values > ceiling)])  
+            samples_with_outlier_values = self.dataframe.iloc[outlier_indices]
+
+            return outlier_indices, samples_with_outlier_values
+        except Exception as exc:
+            return exc
+          
+    def check_for_missing_values(self, attribute):
+        """Computes the sub dataframe containing missing values on the defined attribute
+
+            Parameters
+            ----------
+            attribute : column name which to check for missing values on
+
+            Returns
+            -------
+            sub dataframe containing the attribute missing values
+        """
+        try:
+            import numpy as np
+            nan_values_mask = np.isnan(self.dataframe[attribute])==True
+        
+            return self.dataframe[nan_values_mask] 
+
+        except Exception as exc:
+            return exc
+
+    def check_row_indexes_to_delete(self, missing_threshold=0.5):
+        try:
+            not_missing_counts = self.dataframe.count(axis='columns')
+            no_missing_rates = not_missing_counts/len(self.dataframe.columns)
+            missing_rate_over_threshold_mask = no_missing_rates < missing_threshold 
+
+            row_indexes_to_delete = no_missing_rates[missing_rate_over_threshold_mask].index
+            return row_indexes_to_delete
+
+        except Exception as exc:
+            return exc
+            
 
 class SBS():
     """
@@ -201,3 +300,51 @@ class Binary_classifier():
 
         except Exception as exc:
             return exc
+
+# COMMAND ----------
+
+# Load dataset:
+data_prep_obj = Preprocessing()
+dataset_location = '/dbfs/FileStore/tables/forecaster_data/precipitations_df.csv'
+
+columns_names = ['tmp0', 'tmp1', 'hPa', 'hum', 'pp']
+precipitations_df = data_prep_obj.read_csv(dataset_location, cols_to_use=columns_names, sep_val=',')
+precipitations_df.head()
+
+# COMMAND ----------
+
+"""
+    If there is a row with more than 50% of the attributes with missing values,
+    drop the row.
+    Otherwise, impute the missing value in that attribute.
+"""
+row_indexes_to_delete = data_prep_obj.check_row_indexes_to_delete(0.5)
+row_indexes_to_delete
+
+# COMMAND ----------
+
+"""
+  And now, we check for each attribute, any possible missing values
+"""
+attributes_missing_counts_dict = {}
+for attribute in tqdm(precipitations_df.columns):
+    attribute_missing_sub_df = data_prep_obj.check_for_missing_values(attribute)
+    if attribute_missing_sub_df is not None:
+        attributes_missing_counts_dict[attribute] = len(attribute_missing_sub_df)
+
+attributes_missing_counts_dict
+
+# COMMAND ----------
+
+attributes_names = precipitations_df.columns[:-1]
+target_name = precipitations_df.columns[-1]
+
+ds_bin_classifier = Binary_classifier(precipitations_df, attributes_names, target_name)
+# let's make our target attribute binary:
+precipitations_df[target_name] = data_prep_obj.binarize_target_variable(precipitations_df[target_name])
+precipitations_df[target_name] = precipitations_df[target_name].apply(lambda x: np.int(x))
+
+ds_preprocessor = Preprocessing(precipitations_df)
+
+# COMMAND ----------
+
