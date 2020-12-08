@@ -330,13 +330,36 @@ def sort_by_columns(dataframe, col_to_sort_by=None):
         col_to_sort_by (array, optional): column/s to sort by. Defaults to None.
     """
     try:
-        dataframe = dataframe.sort_values(by=col_to_sort_by)
+        dataframe = dataframe.sort_values(by=col_to_sort_by, ascending=False)
         
         return dataframe
 
     except Exception as exc:
         print(exc)
         return exc
+      
+def register_best_models(dataframe, model_name_tag='tags.mlflow.runName', number_of_models=3, selected_metric='metrics.best_cv_score'):
+    """
+        Registers the best 3 found models in the run experiments
+    """
+    try:
+        import mlflow.sklearn
+
+        top_models_df = sorted_experiments_df.iloc[:number_of_models]
+
+        for id_ in range(number_of_models):   
+            run_id = top_models_df.iloc[id_].run_id
+            print('run_id: ', run_id)
+            model_name = top_models_df.iloc[id_][model_name_tag] + '_' + run_id
+            print('model_name: ', model_name)
+
+            model_uri = "runs:/{run_id}/{artifact_path}".format(run_id=run_id, artifact_path='model') #, artifact_path=use_case_name)
+            model_details = mlflow.register_model(model_uri=model_uri, name=model_name)
+            
+    except Exception as exc:
+        print(exc)
+        return exc
+    
 
 # COMMAND ----------
 
@@ -346,7 +369,11 @@ dataset_location = '/dbfs/FileStore/tables/forecaster_data/precipitations_df.csv
 
 columns_names = ['tmp0', 'tmp1', 'hPa', 'hum', 'pp']
 precipitations_df = data_prep_obj.read_csv(dataset_location, cols_to_use=columns_names, sep_val=',')
-precipitations_df.head()
+
+precipitations_train_df = precipitations_df.iloc[:int(0.8*len(precipitations_df))]
+precipitations_df = None
+data_prep_obj.dataframe = precipitations_train_df
+precipitations_train_df.head()
 
 # COMMAND ----------
 
@@ -379,12 +406,12 @@ attributes_missing_counts_dict
 attributes_names = precipitations_df.columns[:-1]
 target_name = precipitations_df.columns[-1]
 
-ds_bin_classifier = Binary_classifier(precipitations_df, attributes_names, target_name)
+ds_bin_classifier = Binary_classifier(precipitations_train_df, attributes_names, target_name)
 # let's make our target attribute binary:
-precipitations_df[target_name] = data_prep_obj.binarize_target_variable(precipitations_df[target_name])
-precipitations_df[target_name] = precipitations_df[target_name].apply(lambda x: np.int(x))
+precipitations_train_df[target_name] = data_prep_obj.binarize_target_variable(precipitations_train_df[target_name])
+precipitations_train_df[target_name] = precipitations_train_df[target_name].apply(lambda x: np.int(x))
 
-ds_preprocessor = Preprocessing(precipitations_df)
+ds_preprocessor = Preprocessing(precipitations_train_df)
 
 # COMMAND ----------
 
@@ -422,7 +449,6 @@ models_list = [Dummy_clf, GaussianNB_clf, LogisticRegression_clf, SVC_clf]
 # COMMAND ----------
 
 #mlflow.sklearn.autolog()
-
 cv_results_df, best_estimators_dict = ds_bin_classifier.select_model_via_grid_search_cv(models_list,
                                                     models_and_params,
                                                     X_train_scaled,
@@ -437,7 +463,48 @@ cv_results_df
 
 # COMMAND ----------
 
-sort_by_columns(show_mlflow_experiments_info('use_case_name', 'rain_forecaster'), col_to_sort_by=['metrics.best_cv_score'])
+sorted_experiments_df = sort_by_columns(show_mlflow_experiments_info('use_case_name', 'rain_forecaster'), col_to_sort_by=['metrics.best_cv_score'])
+sorted_experiments_df.head(5)
+
+# COMMAND ----------
+
+# MAGIC %md Registration of the best 3 found models based on test metrics
+
+# COMMAND ----------
+
+register_best_models(sorted_experiments_df, number_of_models=3, selected_metric='metrics.best_cv_score')
+
+# COMMAND ----------
+
+from mlflow.tracking import MlflowClient
+
+client = MlflowClient()
+
+desired_registered_models = [x for x in client.list_registered_models() if 'rain_forecaster' in x.name]
+
+# COMMAND ----------
+
+desired_registered_models
+
+# COMMAND ----------
+
+model_1 = desired_registered_models[3]
+run_id = model_1.latest_versions[0].run_id
+
+# COMMAND ----------
+
+import mlflow.sklearn
+
+model_uri = "runs:/" + run_id + "/model"
+model = mlflow.sklearn.load_model(model_uri=model_uri)
+
+# COMMAND ----------
+
+# GET INPUT SCHEMA
+from mlflow.models import Model 
+
+my_model = Model(run_id=run_id)
+print(my_model.get_input_schema())
 
 # COMMAND ----------
 
