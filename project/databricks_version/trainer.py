@@ -7,6 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 from sklearn.dummy import DummyClassifier
 from tqdm import tqdm
+import mlflow
 
 class Preprocessing():
     """
@@ -49,7 +50,7 @@ class Preprocessing():
         except Exception as exc:
             return exc
 
-    def standard_scaler_transformer(self, attributes_set, columns_to_scale):
+    def standard_scaler_transformer(self, attributes_set, columns_to_scale, preprocessor_saving_path="/preprocessor/preprocessor_scaler.pickle"):
         try:
             from sklearn.preprocessing import StandardScaler
             import pandas as pd
@@ -61,7 +62,7 @@ class Preprocessing():
 
             #scaled_df_values = scaler.fit_transform(attributes_set.values)
             fitted_scaler = scaler_pipeline.fit(attributes_set.values)
-            pickle.dump(fitted_scaler, open("preprocessor_scaler.pickle", "wb"))
+            pickle.dump(fitted_scaler, open(preprocessor_saving_path, "wb"))
 
             scaled_df_values = fitted_scaler.transform(attributes_set.values)
             scaled_df = pd.DataFrame(columns=columns_to_scale,
@@ -70,6 +71,7 @@ class Preprocessing():
             return scaled_df
 
         except Exception as exc:
+            print(exc)
             return exc
 
     def get_rejected_attributes(self, correlation_threshold=0.9):
@@ -261,18 +263,24 @@ class Binary_classifier():
             best_estimators_dict = {} 
             i = 0
             for model_name, hyperparams in tqdm(models_params_dict.items()):
-                model = sklearn.base.clone(models_list[i])
+                with mlflow.start_run(run_name='rain_forecaster_{}'.format(model_name), nested=True):
+                    mlflow.set_tag('use_case_name', 'rain_forecaster')
+                    mlflow.set_tag('model_type', model_name)
+                    
+                    model = sklearn.base.clone(models_list[i])
 
-                clf = GridSearchCV(model, hyperparams, cv=cv_folds, scoring=scoring_metrics, 
-                                   refit=refit_metric, return_train_score=True) 
-                clf.fit(X_train, y_train)
-              
-                cv_model_results=pd.DataFrame(pd.DataFrame(clf.cv_results_))
-                cv_results_df = cv_results_df.append(cv_model_results) #, ignore_index=True)
+                    clf = GridSearchCV(model, hyperparams, cv=cv_folds, scoring=scoring_metrics, 
+                                       refit=refit_metric, return_train_score=True) 
+                    clf.fit(X_train, y_train)
 
-                best_estimators_dict[model_name] = clf.best_estimator_
-                self.best_estimator = clf.best_estimator_
-                i += 1
+                    cv_model_results=pd.DataFrame(pd.DataFrame(clf.cv_results_))
+                    cv_results_df = cv_results_df.append(cv_model_results) 
+
+                    best_estimators_dict[model_name] = clf.best_estimator_
+                    self.best_estimator = clf.best_estimator_
+
+                    mlflow.sklearn.log_model(clf.best_estimator_, "rain_forecaster")
+                    i += 1
 
             return cv_results_df, best_estimators_dict
         
@@ -300,6 +308,35 @@ class Binary_classifier():
 
         except Exception as exc:
             return exc
+          
+def show_mlflow_experiments_info(filter_key, filter_value, model_type=None, get_latest_run=False):
+    try:
+        query = "tags.{} = '{}'".format(filter_key, filter_value)
+        results = mlflow.search_runs(filter_string=query)
+        
+        if get_latest_run:
+            return results.iloc[0]
+        
+        return results
+
+    except Exception as exc:
+        print(exc)
+        return exc
+      
+def sort_by_columns(dataframe, col_to_sort_by=None):
+    """Sorts dataframe by columns
+
+    Args:
+        col_to_sort_by (array, optional): column/s to sort by. Defaults to None.
+    """
+    try:
+        dataframe = dataframe.sort_values(by=col_to_sort_by)
+        
+        return dataframe
+
+    except Exception as exc:
+        print(exc)
+        return exc
 
 # COMMAND ----------
 
@@ -336,6 +373,9 @@ attributes_missing_counts_dict
 
 # COMMAND ----------
 
+"""
+  Scaling numeric attributes and binarize target
+"""
 attributes_names = precipitations_df.columns[:-1]
 target_name = precipitations_df.columns[-1]
 
@@ -345,6 +385,59 @@ precipitations_df[target_name] = data_prep_obj.binarize_target_variable(precipit
 precipitations_df[target_name] = precipitations_df[target_name].apply(lambda x: np.int(x))
 
 ds_preprocessor = Preprocessing(precipitations_df)
+
+# COMMAND ----------
+
+X_train, X_validation, y_train, y_validation = ds_bin_classifier.split_into_train_validation_sets(0.3)
+
+X_train_scaled = ds_preprocessor.standard_scaler_transformer(X_train, X_train.columns, preprocessor_saving_path='preprocessor_scaler.pickle')
+X_train = None
+
+# COMMAND ----------
+
+'''
+  Training phase.
+  We decide a list of desired models to implement in the training process, all
+  of them being part of sklearn:
+  - Dummy most-frequent classifier
+  - Gaussian Naive Bayes classifier
+  - Logistic regression classifier
+  - Support Vector classifier
+'''
+
+models_and_params = {'DummyClassifier': {'strategy': ['most_frequent']},
+                     'GaussianNB': {'var_smoothing': [1e-09, 1e-08, 1e-10]},
+                     'LogisticRegression': {'solver': ['liblinear'],
+                                            'penalty': ['l1', 'l2'],
+                                            'C': [1, 0.1, 0.01]},
+                     'SVC': {'C': [1, 0.1, 0.01], 'gamma': ['scale', 'auto'],
+                             'class_weight': ['balanced']}}
+
+Dummy_clf = DummyClassifier()
+GaussianNB_clf = GaussianNB()
+LogisticRegression_clf = LogisticRegression()
+SVC_clf = SVC()
+models_list = [Dummy_clf, GaussianNB_clf, LogisticRegression_clf, SVC_clf]
+
+# COMMAND ----------
+
+#mlflow.sklearn.autolog()
+
+cv_results_df, best_estimators_dict = ds_bin_classifier.select_model_via_grid_search_cv(models_list,
+                                                    models_and_params,
+                                                    X_train_scaled,
+                                                    y_train.values,
+                                                    cv_folds=10,
+                                                    scoring_metrics=['recall',
+                                                                     'f1',
+                                                                     'roc_auc'],
+                                                    refit_metric='roc_auc')
+
+cv_results_df
+
+# COMMAND ----------
+
+sort_by_columns(show_mlflow_experiments_info('use_case_name', 'rain_forecaster'), col_to_sort_by=['metrics.best_cv_score'])
 
 # COMMAND ----------
 
