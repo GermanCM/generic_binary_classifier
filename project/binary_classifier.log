@@ -1,0 +1,321 @@
+2021-02-22 17:21:26,351 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:21:42,188 raised exception at Dataset_eda.check_dataframe_content: object of type 'NoneType' has no len()
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_EDA/eda.py", line 17, in check_dataframe_content
+    df_length = len(self.dataframe)
+TypeError: object of type 'NoneType' has no len()
+2021-02-22 17:22:10,555 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:23:01,017 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:24:30,076 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:24:34,792 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:25:17,126 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:25:36,413 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:25:52,185 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:26:06,836 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:26:19,015 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:26:50,617 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:27:07,508 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:27:19,631 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:43:36,937 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:43:47,634 raised exception at Dataset_preprocessing.load_dataset: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_elt/dataset_extraction.py", line 131, in load_dataset
+    extracted_dataset = pd.read_csv(dataset_location_route, sep=separator)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 605, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 457, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 814, in __init__
+    self._engine = self._make_engine(self.engine)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1045, in _make_engine
+    return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1862, in __init__
+    self._open_handles(src, kwds)
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/parsers.py", line 1363, in _open_handles
+    storage_options=kwds.get("storage_options", None),
+  File "/Users/germancabrera/anaconda3/lib/python3.7/site-packages/pandas/io/common.py", line 647, in get_handle
+    newline="",
+FileNotFoundError: [Errno 2] No such file or directory: '.\\datasets\\precipitations_df.csv'
+2021-02-22 17:50:54,523 raised exception at Dataset_eda.get_rejected_attributes: No module named 'pandas_profiling'
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_EDA/eda.py", line 47, in get_rejected_attributes
+    import pandas_profiling
+ModuleNotFoundError: No module named 'pandas_profiling'
+2021-02-22 17:51:00,229 NumExpr defaulting to 8 threads.
+2021-02-22 17:51:02,183 raised exception at Dataset_eda.check_for_missing_values: name 'dataframe' is not defined
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_EDA/eda.py", line 109, in check_for_missing_values
+    nan_values_mask = np.isnan(dataframe[attribute])==True
+NameError: name 'dataframe' is not defined
+2021-02-22 17:51:02,183 raised exception at Dataset_eda.check_for_missing_values: name 'dataframe' is not defined
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_EDA/eda.py", line 109, in check_for_missing_values
+    nan_values_mask = np.isnan(dataframe[attribute])==True
+NameError: name 'dataframe' is not defined
+2021-02-22 17:51:02,183 raised exception at Dataset_eda.check_for_missing_values: name 'dataframe' is not defined
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_EDA/eda.py", line 109, in check_for_missing_values
+    nan_values_mask = np.isnan(dataframe[attribute])==True
+NameError: name 'dataframe' is not defined
+2021-02-22 17:51:02,183 raised exception at Dataset_eda.check_for_missing_values: name 'dataframe' is not defined
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_EDA/eda.py", line 109, in check_for_missing_values
+    nan_values_mask = np.isnan(dataframe[attribute])==True
+NameError: name 'dataframe' is not defined
+2021-02-22 17:51:02,183 raised exception at Dataset_eda.check_for_missing_values: name 'dataframe' is not defined
+Traceback (most recent call last):
+  File "/Users/germancabrera/Google_Drive/generic_bin_classifier/generic_binary_classifier/project/dataset_EDA/eda.py", line 109, in check_for_missing_values
+    nan_values_mask = np.isnan(dataframe[attribute])==True
+NameError: name 'dataframe' is not defined

@@ -19,3 +19,4 @@ project/.DS_Store
 project/dataset_EDA/__pycache__/eda.cpython-37.pyc
 project/dataset_elt/__pycache__/dataset_extraction.cpython-37.pyc
 project/dataset_preprocessing/__pycache__/preprocessing.cpython-37.pyc
+.DS_Store

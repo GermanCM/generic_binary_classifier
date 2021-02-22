@@ -14,6 +14,7 @@ from tqdm import tqdm
 from dataset_EDA import eda as ds_eda
 from dataset_elt import dataset_extraction as ds_ext
 import logging
+import pandas as pd 
 
 logging.basicConfig(filename='classifier.log',
                     level=logging.INFO, 
@@ -23,29 +24,19 @@ logger = logging.getLogger("Dataset_eda")
 # %%[markdown]
 # Load dataset:
 dataset_location = r'.\datasets\precipitations_df.csv'
-iot_client_host = "industryonesait.cwbyminsait.com"
-iot_client_name = "predictionclient"
-iot_client_token = "1b5e4bf62cb94812a838e215b20cdcdd"
 
-ds_extractor = ds_ext.Dataset_extraction(dataset_location, iot_client_host, iot_client_name, iot_client_token)
+ds_extractor = ds_ext.Dataset_extraction(dataset_location)
 
-ontology = "predictionmodel"
 columns_names = ['tmp0', 'tmp1', 'hPa', 'hum', 'pp']
 limit_rows_number = 5000
 # csv mode
 ds_extractor.dataset_location = dataset_location
 precipitations_df = ds_extractor.load_dataset(csv_mode=True, separator=',')
-# ontology mode:
-'''
-precipitations_df = ds_extractor.load_dataset(ontology_name=ontology, 
-                                              columns_names=columns_names, 
-                                              desired_query_base=None, 
-                                              limit_rows_number=5000, 
-                                              ontology_first_level_name=None, 
-                                              ontology_items_field_name='items')
-'''
+if precipitations_df is None:
+    precipitations_df = pd.read_csv('./datasets/precipitations_df.csv')
+
 #%%
-precipitations_df.drop(['Unnamed: 0'], axis=1, inplace=True)
+precipitations_df.drop(['Unnamed: 0'], axis=1, inplace=True) 
 precipitations_df.head()
 
 # %%[markdown]
@@ -208,7 +199,6 @@ pickle.dump(selected_model, open("selected_model.pickle", "wb"))
 selected_model_loaded = pickle.load(open("selected_model.pickle", "rb"))
 selected_model_loaded.predict(X_validation_scaled[3].reshape(1, -1))
 
-
 #%%
 '''
 best_estimator_df, best_estimator_object = ds_bin_classifier.choose_best_estimator(cv_results_df, 
@@ -228,7 +218,7 @@ best_estimator_df = cv_results_df[max_metric_score_mask]
 best_estimator_name = 'SVC' #best_estimator_df.iloc[0].index
 best_estimator_object = best_estimators_dict[best_estimator_name]
 #%%
-best_estimator_object.predict(X_validation_scaled.iloc[6].values.reshape(1, -1))
+best_estimator_object.predict(X_validation_scaled[6].reshape(1, -1))
 
 #%%[markdown]
 ## Pruebo a reentrenar el predictor sobre todo el train set:
