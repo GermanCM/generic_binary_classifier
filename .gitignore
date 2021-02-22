@@ -8,3 +8,14 @@ project/dataset_preprocessing/__pycache__/__init__.cpython-37.pyc
 project/modelling/__pycache__/__init__.cpython-37.pyc
 project/tests/__pycache__/generic_test.cpython-37-pytest-6.0.1.pyc
 project/validation/__pycache__/__init__.cpython-37.pyc
+.DS_Store
+project/.DS_Store
+.DS_Store
+project/tests/__pycache__/generic_test.cpython-37-pytest-6.1.1.pyc
+project/.DS_Store
+.DS_Store
+project/.DS_Store
+.DS_Store
+project/dataset_EDA/__pycache__/eda.cpython-37.pyc
+project/dataset_elt/__pycache__/dataset_extraction.cpython-37.pyc
+project/dataset_preprocessing/__pycache__/preprocessing.cpython-37.pyc

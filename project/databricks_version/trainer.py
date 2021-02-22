@@ -21,8 +21,7 @@ class Preprocessing():
             return self.dataframe
 
         except Exception as exc:
-                logger.exception('raised exception at {}: {}'.format(
-                    logger.name + '.' + self.impute_attribute.__name__, exc))
+            return exc
 
     def binarize_target_variable(self, target_series):
         try:
@@ -31,9 +30,7 @@ class Preprocessing():
             return target_series
 
         except Exception as exc:
-                logger.exception('raised exception at {}: {}'.format(
-                                 logger.name + '.' +
-                                 self.binarize_target_variable.__name__, exc))
+            return exc
 
     def standard_scaler_transformer(self, attributes_set, columns_to_scale):
         try:
@@ -56,10 +53,7 @@ class Preprocessing():
             return scaled_df
 
         except Exception as exc:
-                logger.exception('raised exception at {}: {}'.format(
-                                 logger.name + '.' +
-                                 self.standard_scaler_transformer.__name__,
-                                 exc))
+            return exc
 
 
 class SBS():
@@ -154,7 +148,7 @@ class Binary_classifier():
             return X_train, X_validation, y_train, y_validation
         
         except Exception as exc:
-            logger.exception('raised exception at {}: {}'.format(logger.name+'.'+self.split_into_train_validation_sets.__name__, exc))
+            return exc
 
     def select_model_via_grid_search_cv(self, models_list, models_params_dict, X_train, y_train, cv_folds=5, scoring_metrics=['recall', 'f1', 'roc_auc'], refit_metric='roc_auc'):
         try:
@@ -183,7 +177,7 @@ class Binary_classifier():
             return cv_results_df, best_estimators_dict
         
         except Exception as exc:
-            logger.exception('raised exception at {}: {}'.format(logger.name+'.'+self.select_model_via_grid_search_cv.__name__, exc))
+            return exc
 
     def choose_best_estimator(self, validation_results_dataframe, metric, 
                               best_estimators_dictionary):
@@ -198,11 +192,11 @@ class Binary_classifier():
             return best_estimator_df, best_estimator_object
 
         except Exception as exc:
-            logger.exception('raised exception at {}: {}'.format(logger.name+'.'+self.choose_best_estimator.__name__, exc))
+            return exc
 
     def retrain_best_estimator_on_whole_train_set(self, X_train, y_train):
         try:
             self.best_estimator.fit(X_train, y_train)
 
         except Exception as exc:
-            logger.exception('raised exception at {}: {}'.format(logger.name+'.'+self.choose_best_estimator.__name__, exc))
+            return exc
