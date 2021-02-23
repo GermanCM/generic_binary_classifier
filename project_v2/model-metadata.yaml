@@ -1,0 +1,5 @@
+name: drumpush-classification
+type: inference
+targetType: binary
+inferenceModel:
+  targetName: pp
